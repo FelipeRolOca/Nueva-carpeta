@@ -26,12 +26,23 @@ peticion.addEventListener("readystatechange", function () {
             casillas.appendChild (imagen)
             casillas.appendChild (description)
             casillas.appendChild (precio)
+
+
             link.addEventListener ('click', function () {
                 var contador = 0;
                 contador = contador + 1;
                 var lugardelcontador = document.querySelector ("#contador");
                 lugardelcontador.innerText = contador;
             })
+            link.addEventListener ('click', function () {
+                var preciomasalto = -9 ;
+                if (p.precio > preciomasalto) {
+                    preciomasalto = p.precio
+                    console.log ( "producto mas caro:",preciomasalto)
+                }
+                
+            })
+            
 
            
             link.addEventListener('click', function () {
@@ -68,12 +79,6 @@ peticion.addEventListener("readystatechange", function () {
                   
                     
                 });
-                var precioalto = -9 ;
-                if (p.precio > precioalto) {
-                    precioalto = p.precio                   
-                }
-                console.log (precioalto)
-
                 document.querySelector('tbody').appendChild(fila);
             })
         });
