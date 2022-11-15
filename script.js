@@ -39,23 +39,6 @@ peticion.addEventListener("readystatechange", function () {
                 contador = contador + 1;
                 var lugardelcontador = document.querySelector ("#contador");
                 lugardelcontador.innerText = contador;
-                if (p.precio > preciomasalto) {
-                    preciomasalto = p.precio
-                    console.log (preciomasalto)
-                }
-                var productomascaro = document.querySelector ("#preciomasalto");
-                productomascaro.setAttribute('href', '#');
-                productomascaro.innerText = "el producto mas caro es";
-                var lugar = document.querySelector ("#lugar") ;
-
-                productomascaro.addEventListener('click', function (event) {
-                    var crear = document.createElement ('p');
-                    crear.innerText = preciomasalto;
-                    lugar.appendChild(crear);                   
-                });
-
-            
-                
                 var fila = document.createElement('tr');
                 var tdNombre = document.createElement('td');
                 tdNombre.innerText = p.nombre;
@@ -75,8 +58,26 @@ peticion.addEventListener("readystatechange", function () {
                     event.preventDefault ();
                     console.log(event.target.parentElement.parentElement.remove());
                     total = total - p.precio;
+                    preciofinal.innerText = total;
                     console.log("total: ", total);
                     contador = contador - 1;
+                    lugardelcontador.innerText = contador;
+                });
+                
+                if (p.precio > preciomasalto) {
+                    preciomasalto = p.precio
+                    console.log (preciomasalto)
+                    var nombremascaro = p.nombre 
+                    console.log (nombremascaro)
+                }
+                var productomascaro = document.querySelector ("#preciomasalto");
+                productomascaro.innerText = "el producto mas caro es";
+                var lugar = document.querySelector ("#lugar") ;
+
+                productomascaro.addEventListener('click', function (event) {
+                    var crear = document.createElement ('p');
+                    crear.innerText = nombremascaro + preciomasalto;
+                    lugar.appendChild(crear);                   
                 });
 
             
