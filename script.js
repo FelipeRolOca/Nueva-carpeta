@@ -2,13 +2,13 @@
 var peticion = new XMLHttpRequest();
 peticion.open("GET", "http://127.0.0.1:5500/productos.json", true);
 var total = 0;
+var contador = 0;
+var preciomasalto = -9 ;
 
 peticion.addEventListener("readystatechange", function () {
     if (this.readyState == 4 && this.status == 200) {
         var productos = JSON.parse(this.responseText);
-        var total = 0;
-        var contador = 0;
-        var preciomasalto = -9 ;
+
         productos.forEach(p => {
             var div = document.querySelector ('.productos');
             var casillas = document.createElement ('div');
@@ -41,10 +41,17 @@ peticion.addEventListener("readystatechange", function () {
                 lugardelcontador.innerText = contador;
                 if (p.precio > preciomasalto) {
                     preciomasalto = p.precio
-                    console.log ( "producto mas caro:",preciomasalto);
+                    console.log (preciomasalto)
                 }
                 var productomascaro = document.querySelector ("#preciomasalto");
-                productomascaro.innerText = preciomasalto;
+                productomascaro.setAttribute('href', '#');
+                productomascaro.innerText = "el producto mas caro es";
+
+                productomascaro.addEventListener('click', function (event) {
+                    var crear = document.createElement ('p');
+                    crear.innerText = preciomasalto;
+                    
+                }) ;
 
             
                 
@@ -63,16 +70,15 @@ peticion.addEventListener("readystatechange", function () {
                 tdBorrar.appendChild(linkBorrar);
                 fila.appendChild(tdBorrar);
 
-            
-
-                
                 linkBorrar.addEventListener('click', function (event) {
+                    
                     console.log(event.target.parentElement.parentElement.remove());
                     total = total - p.precio;
                     console.log("total: ", total);
-                  
-                    
+                    contador = contador - 1;
                 });
+
+            
                 document.querySelector('tbody').appendChild(fila);
             })
         });
