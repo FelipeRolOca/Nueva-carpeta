@@ -3,7 +3,7 @@ var peticion = new XMLHttpRequest();
 peticion.open("GET", "http://127.0.0.1:5500/productos.json", true);
 var total = 0;
 var contador = 0;
-var preciomasalto = -9 ;
+
 
 peticion.addEventListener("readystatechange", function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -64,23 +64,6 @@ peticion.addEventListener("readystatechange", function () {
                     lugardelcontador.innerText = contador;
                 });
                 
-                if (p.precio > preciomasalto) {
-                    preciomasalto = p.precio
-                    console.log (preciomasalto)
-                    var nombremascaro = p.nombre 
-                    console.log (nombremascaro)
-                }
-                var productomascaro = document.querySelector ("#preciomasalto");
-                productomascaro.innerText = "el producto mas caro es";
-                var lugar = document.querySelector ("#lugar") ;
-
-                productomascaro.addEventListener('click', function (event) {
-                    var crear = document.createElement ('p');
-                    crear.innerText = nombremascaro + preciomasalto;
-                    lugar.appendChild(crear);                   
-                });
-
-            
                 document.querySelector('tbody').appendChild(fila);
             })
         });
@@ -88,3 +71,25 @@ peticion.addEventListener("readystatechange", function () {
 });
 
 peticion.send();
+var preciomasalto = -9 ;
+var botonCaro = document.querySelector("#caro");
+
+botonCaro.addEventListener("click", function () {
+
+    var productosCarrito = document.querySelector('.carrito tbody').children;
+
+    for (let index = 0; index < productosCarrito.length; index++) {
+        const productoRow = productosCarrito[index];
+
+        let productoNombre = productoRow.children[0].innerText;
+        let productoPrecio = Number(productoRow.children[1].innerText);
+        console.log(productoNombre, productoPrecio);
+        if (productoPrecio > preciomasalto ) {
+            preciomasalto = productoPrecio
+            console.log (preciomasalto)
+        }
+        var lugar = document.querySelector("#lugar")
+        lugar.innerText = preciomasalto
+    }
+    
+}); 
