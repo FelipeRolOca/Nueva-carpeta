@@ -30,7 +30,7 @@ peticion.addEventListener("readystatechange", function () {
 
             
             link.addEventListener('click', function (event) {
-                event.preventDefault
+                event.preventDefault ();
                 console.log(p.nombre, p.precio);
                  total = total + p.precio;
                 console.log("total: ", total);
@@ -46,12 +46,13 @@ peticion.addEventListener("readystatechange", function () {
                 var productomascaro = document.querySelector ("#preciomasalto");
                 productomascaro.setAttribute('href', '#');
                 productomascaro.innerText = "el producto mas caro es";
+                var lugar = document.querySelector ("#lugar") ;
 
                 productomascaro.addEventListener('click', function (event) {
                     var crear = document.createElement ('p');
                     crear.innerText = preciomasalto;
-                    
-                }) ;
+                    lugar.appendChild(crear);                   
+                });
 
             
                 
@@ -71,7 +72,7 @@ peticion.addEventListener("readystatechange", function () {
                 fila.appendChild(tdBorrar);
 
                 linkBorrar.addEventListener('click', function (event) {
-                    
+                    event.preventDefault ();
                     console.log(event.target.parentElement.parentElement.remove());
                     total = total - p.precio;
                     console.log("total: ", total);
